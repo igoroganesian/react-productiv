@@ -27,12 +27,12 @@ function TodoApp({initialTodos}) {
 
   /** update a todo with updatedTodo */
   function update(updatedTodo) {
-    // console.log(updatedTodo);
-    // const todo = todos.filter(todo => todo.id === updatedTodo.id);
-    function updatedTodos(todos) {
-      todos.map(todo => { todo.id === updatedTodo.id ? updatedTodo : todo });
-    }
-    setTodos(updatedTodos(todos));
+    setTodos(todos => {
+      const updatedTodos = todos.map(todo => {
+        return todo.id === updatedTodo.id ? updatedTodo : todo;
+      });
+      return updatedTodos;
+    })
   }
 
   /** delete a todo by id */

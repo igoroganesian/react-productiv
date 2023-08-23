@@ -17,10 +17,12 @@ import TodoForm from "./TodoForm";
 
 function EditableTodo( {todo, update, remove} ) {
   const [isEditing, setIsEditing] = useState(false);
+  console.log("Re-rendering. isEditing:", isEditing);
 
   /** Toggle if this is being edited */
   function toggleEdit() {
-    setIsEditing(b => !b);
+    // setIsEditing(b => !b); // TODO: Why doesn't this work?
+    setIsEditing(!isEditing);
   }
 
   /** Call remove fn passed to this. */
