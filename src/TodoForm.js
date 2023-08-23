@@ -34,6 +34,8 @@ function TodoForm({initialFormData, handleSave}) {
   function handleSubmit(evt) {
     evt.preventDefault();
     if (initialFormData) {
+      // TODO: This seems hacky to inject extra data into form data
+      // in order to surface it back to the TodoApp component
       handleSave({...formData, id: initialFormData.id});
     }
     handleSave(formData);

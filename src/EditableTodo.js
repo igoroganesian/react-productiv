@@ -43,6 +43,8 @@ function EditableTodo( {todo, update, remove} ) {
     />
   );
 
+  // TODO: Mention we pulled these out of the return() and set them as vars
+  // in order to make the return statement cleaner / simpler with a one-liner
   const todoComponent = (
     <div className="mb-3">
     <div className="float-end text-sm-end">
