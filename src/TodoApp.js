@@ -59,16 +59,7 @@ function TodoApp({initialTodos}) {
     </section>
   )
 
-  // filter function to get top todo
-  function getTopTodo(todos) {
-    return todos.reduce(
-      (acc, cur) => (
-        cur.priority < acc.priority ? cur : acc, todos[0]
-      )
-    );
-  }
-
-  // more flexible version of TopTodo
+  // more flexible version of TopTodo section
   const topTodoSectionViaFilter = (
     <section className="mb-4">
       <h3>Top Todo</h3>
@@ -94,6 +85,16 @@ function TodoApp({initialTodos}) {
 
         </div>
       </main>
+  );
+}
+
+
+// filter function to get top todo
+function getTopTodo(todos) {
+  return todos.reduce(
+    (acc, cur) => (
+      cur.priority < acc.priority ? cur : acc, todos[0]
+    )
   );
 }
 
