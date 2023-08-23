@@ -17,7 +17,7 @@ function EditableTodoList({todos, update, remove}) {
       <div>
         {todos.map(todo => (
           <EditableTodo todo={todo}
-            update={() => update(todo.id)}
+            update={update}
             remove={() => remove(todo.id)}/>
         ))}
       </div>
