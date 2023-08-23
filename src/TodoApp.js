@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuid } from "uuid";
 
 import TopTodo from "./TopTodo";
+import FilterTodos from "./FilterTodos";
 import EditableTodoList from "./EditableTodoList";
 import TodoForm from "./TodoForm";
 
@@ -55,6 +56,23 @@ function TodoApp({initialTodos}) {
     <section className="mb-4">
       <h3>Top Todo</h3>
       <TopTodo todos={todos}/>
+    </section>
+  )
+
+  // filter function to get top todo
+  function getTopTodo(todos) {
+    return todos.reduce(
+      (acc, cur) => (
+        cur.priority < acc.priority ? cur : acc, todos[0]
+      )
+    );
+  }
+
+  // more flexible version of TopTodo
+  const topTodoSectionViaFilter = (
+    <section className="mb-4">
+      <h3>Top Todo</h3>
+      <FilterTodos todos={todos} filterFunction={getTopTodo}/>
     </section>
   )
 
