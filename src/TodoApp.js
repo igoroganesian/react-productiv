@@ -27,12 +27,18 @@ function TodoApp({initialTodos}) {
 
   /** update a todo with updatedTodo */
   function update(updatedTodo) {
-    setTodos(todos => {
-      const updatedTodos = todos.map(todo => {
-        return todo.id === updatedTodo.id ? updatedTodo : todo;
-      });
-      return updatedTodos;
-    })
+    setTodos(
+      todos => todos.map(
+        todo => todo.id === updatedTodo.id ? updatedTodo : todo
+      )
+    )
+
+    // setTodos(todos => {
+    //   const updatedTodos = todos.map(todo => {
+    //     return todo.id === updatedTodo.id ? updatedTodo : todo;
+    //   });
+    //   return updatedTodos;
+    // })
   }
 
   /** delete a todo by id */
@@ -74,3 +80,5 @@ function TodoApp({initialTodos}) {
 }
 
 export default TodoApp;
+
+
