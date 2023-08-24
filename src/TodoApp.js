@@ -27,6 +27,7 @@ function TodoApp({initialTodos}) {
 
   /** delete a todo by id */
   function remove(id) {
+    
   }
 
   return (
