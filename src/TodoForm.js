@@ -14,16 +14,19 @@ function TodoForm({initialFormData, handleSave}) {
   const initialState = {
     title: "",
     description: "",
-    priority: ""
+    priority: 1
+    //tf?
   }
   const [formData, setFormData] = useState(initialFormData || initialState);
 
   /** Update form input. */
   function handleChange(evt) {
-    const { name, value } = evt.target
+    let { name, value } = evt.target
+    if (name === 'priority') value = Number(value);
     setFormData(formData => ({
       ...formData,
-      [name]: value
+      [name]: value,
+      // priority: Number(value)
     }));
   }
 

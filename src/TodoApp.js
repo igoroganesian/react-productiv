@@ -21,15 +21,23 @@ function TodoApp({initialTodos}) {
 
   /** add a new todo to list */
   function create(newTodo) {
+    let newTodoWithId = { ...newTodo, id: uuid() };
+    setTodos(todos => [...todos, newTodoWithId]);
   }
 
   /** update a todo with updatedTodo */
   function update(updatedTodo) {
+    // console.log(updatedTodo);
+    // const todo = todos.filter(todo => todo.id === updatedTodo.id);
+    function updatedTodos(todos) {
+      todos.map(todo => { todo.id === updatedTodo.id ? updatedTodo : todo });
+    }
+    setTodos(updatedTodos(todos));
   }
 
   /** delete a todo by id */
   function remove(id) {
-
+    setTodos(todos => todos.filter(todo => todo.id !== id));
   }
 
   const editableTodoListComponent =

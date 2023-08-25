@@ -12,11 +12,12 @@ import EditableTodo from "./EditableTodo";
  */
 
 function EditableTodoList({todos, update, remove}) {
-  console.log(todos);
   return (
       <div>
         {todos.map(todo => (
-          <EditableTodo todo={todo}
+          <EditableTodo
+            key={todo.id}
+            todo={todo}
             update={update}
             remove={() => remove(todo.id)}/>
         ))}
