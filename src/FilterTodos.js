@@ -12,7 +12,7 @@ import Todo from "./Todo";
  */
 
 function FilterTodos({ todos, filterFunction }) {
-  let filteredTodos = filterFunction(todos)
+  const filteredTodos = filterFunction(todos)
 
   return (
     <div className="FilteredTodos">

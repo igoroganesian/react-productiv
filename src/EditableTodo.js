@@ -7,7 +7,7 @@ import TodoForm from "./TodoForm";
  * Props
  * - todo
  * - update(): fn to call to update a todo
- * - remove(): fn to call to remove a todo
+ * - removeThis(): fn to call to remove a todo
  *
  * State
  * - isEditing
@@ -15,25 +15,24 @@ import TodoForm from "./TodoForm";
  * EditableTodoList -> EditableTodo -> { Todo, TodoForm }
  */
 
-function EditableTodo( {todo, update, remove} ) {
+function EditableTodo({ todo, update, removeThis }) {
   const [isEditing, setIsEditing] = useState(false);
-  console.log("Re-rendering. isEditing:", isEditing);
 
   /** Toggle if this is being edited */
   function toggleEdit() {
-    // setIsEditing(b => !b); // TODO: Why doesn't this work?
-    setIsEditing(!isEditing);
+    setIsEditing(b => !b);
   }
 
-  /** Call remove fn passed to this. */
+  /** Call removeThis fn passed to this. */
   function handleDelete() {
-    remove();
+    removeThis();
   }
 
   /** Edit form saved; toggle isEditing and update in ancestor. */
   function handleSave(formData) {
-    toggleEdit();
     update(formData);
+    //TODO: readme > updateTodo etc.
+    toggleEdit();
   }
 
   const todoFormComponent = (
@@ -43,36 +42,30 @@ function EditableTodo( {todo, update, remove} ) {
     />
   );
 
-  // TODO: Mention we pulled these out of the return() and set them as vars
-  // in order to make the return statement cleaner / simpler with a one-liner
   const todoComponent = (
     <div className="mb-3">
-    <div className="float-end text-sm-end">
-      <button
+      <div className="float-end text-sm-end">
+        <button
           className="EditableTodo-toggle btn-link btn btn-sm"
           onClick={toggleEdit}>
-        Edit
-      </button>
-      <button
+          Edit
+        </button>
+        <button
           className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
           onClick={handleDelete}>
-        Del
-      </button>
+          Del
+        </button>
+      </div>
+
+      <Todo
+        todo={todo} />
     </div>
-
-    <Todo
-      id={todo.id}
-      title={todo.title}
-      description={todo.description}
-      priority={todo.priority}/>
-  </div>
-  )
-
+  );
 
   return (
-      <div className="EditableTodo">
-        { isEditing ? todoFormComponent : todoComponent }
-      </div>
+    <div className="EditableTodo">
+      {isEditing ? todoFormComponent : todoComponent}
+    </div>
   );
 }
 

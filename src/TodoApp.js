@@ -17,12 +17,12 @@ import TodoForm from "./TodoForm";
  * App -> TodoApp -> { TodoForm, EditableTodoList }
  */
 
-function TodoApp({initialTodos}) {
+function TodoApp({ initialTodos }) {
   const [todos, setTodos] = useState(initialTodos);
 
   /** add a new todo to list */
   function create(newTodo) {
-    let newTodoWithId = { ...newTodo, id: uuid() };
+    const newTodoWithId = { ...newTodo, id: uuid() };
     setTodos(todos => [...todos, newTodoWithId]);
   }
 
@@ -32,14 +32,7 @@ function TodoApp({initialTodos}) {
       todos => todos.map(
         todo => todo.id === updatedTodo.id ? updatedTodo : todo
       )
-    )
-
-    // setTodos(todos => {
-    //   const updatedTodos = todos.map(todo => {
-    //     return todo.id === updatedTodo.id ? updatedTodo : todo;
-    //   });
-    //   return updatedTodos;
-    // })
+    );
   }
 
   /** delete a todo by id */
@@ -47,49 +40,42 @@ function TodoApp({initialTodos}) {
     setTodos(todos => todos.filter(todo => todo.id !== id));
   }
 
-  const editableTodoListComponent =
-    <EditableTodoList todos={todos} update={update} remove={remove}/>
-
-  const noTodos = <span className="text-muted">You have no todos.</span>
-
   const topTodoSection = (
     <section className="mb-4">
       <h3>Top Todo</h3>
-      <TopTodo todos={todos}/>
+      <TopTodo todos={todos} />
     </section>
-  )
-
-  // more flexible version of TopTodo section
-  const topTodoSectionViaFilter = (
-    <section className="mb-4">
-      <h3>Top Todo</h3>
-      <FilterTodos todos={todos} filterFunction={getTopTodo}/>
-    </section>
-  )
+  );
 
   return (
-      <main className="TodoApp">
-        <div className="row">
+    <main className="TodoApp">
+      <div className="row">
 
-          <div className="col-md-6">
-             { todos.length === 0 ? noTodos : editableTodoListComponent}
-          </div>
-
-          <div className="col-md-6">
-            { todos.length === 0 ? null : topTodoSection}
-            <section>
-              <h3 className="mb-3">Add Nü</h3>
-              <TodoForm handleSave={create}/>
-            </section>
-          </div>
-
+        <div className="col-md-6">
+          {todos.length === 0
+            ? (<span className="text-muted">You have no todos.</span>)
+            : (<EditableTodoList
+              todos={todos}
+              update={update}
+              remove={remove}
+            />)}
         </div>
-      </main>
+
+        <div className="col-md-6">
+          {todos.length === 0 ? null : topTodoSection}
+          <section>
+            <h3 className="mb-3">Add Nü</h3>
+            <TodoForm handleSave={create} />
+          </section>
+        </div>
+
+      </div>
+    </main>
   );
 }
 
 
-// filter function to get top todo
+// filter function to return top todo, takes [...todos]
 function getTopTodo(todos) {
   return todos.reduce(
     (acc, cur) => (
@@ -100,4 +86,10 @@ function getTopTodo(todos) {
 
 export default TodoApp;
 
-
+  // more flexible version of TopTodo section
+  // const topTodoSectionViaFilter = (
+  //   <section className="mb-4">
+  //     <h3>Top Todo</h3>
+  //     <FilterTodos todos={todos} filterFunction={getTopTodo} />
+  //   </section>
+  // );
